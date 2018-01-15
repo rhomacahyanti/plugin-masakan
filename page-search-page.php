@@ -7,6 +7,7 @@ get_header(); ?>
 
 		<?php
 
+		$searchinput = $_GET['searchinput'];
     $typeOfFood = $_GET['type-of-food'];
     $originOfFood = $_GET['origin-of-food'];
     $difficultyLevelBottom = $_GET['difficulty-level-bottom'];
@@ -26,8 +27,21 @@ get_header(); ?>
           WHERE post_meta.meta_value BETWEEN '" . $difficultyLevelBottom . "' AND '" . $difficultyLevelUp . "'
           ) meta ON meta.post_id = posts.ID
         WHERE posts.post_type = 'food'
-          AND term.name IN ('" . $typeOfFood . "', '" . $originOfFood . "')"
+          AND ((term.name IN ('" . $typeOfFood . "', '" . $originOfFood . "')) OR posts.post_title = '" . $searchinput . "')"
         );
+
+		if ($searchinput != ""){
+			$search_results = $wpdb->get_results("
+	        SELECT DISTINCT posts.*
+	        FROM $wpdb->posts posts
+	        INNER JOIN $wpdb->postmeta post_meta
+	          ON post_meta.post_id = posts.ID
+	        WHERE posts.post_type = 'food' AND posts.post_status = 'publish'
+	          AND (posts.post_content LIKE '%" . $searchinput . "%'
+						OR posts.post_title LIKE '%" . $searchinput . "%'
+						OR post_meta.meta_value LIKE '%" . $searchinput . "%')"
+	        );
+		}
 
     foreach ($search_results as $post) { ?>
       <h2>

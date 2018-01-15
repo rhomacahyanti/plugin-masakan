@@ -3,7 +3,7 @@
     <div>
         <p>
           <label class="screen-reader-text" for="s"><?php _x( 'Search food:', 'label' ); ?></label>
-          <input type="text" value="<?php echo get_search_query(); ?>" name="searchquery"/>
+          <input type="text" value="<?php echo get_search_query(); ?>" name="searchinput" placeholder="Search" id="searchinput" class="searchinput"/>
         </p>
 
         <p>
