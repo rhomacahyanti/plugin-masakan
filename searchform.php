@@ -1,10 +1,19 @@
+<?php  get_header(); ?>
+
+<div class="search-box">
 <form role="search" method="get" id="searchform"
     class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>search-page">
     <div>
-        <p>
+        <div class="food-suggestion">
           <label class="screen-reader-text" for="s"><?php _x( 'Search food:', 'label' ); ?></label>
-          <input type="text" value="<?php echo get_search_query(); ?>" name="searchinput" placeholder="Search" id="searchinput" class="searchinput"/>
-        </p>
+          <input type="text" value="<?php echo get_search_query(); ?>" name="searchinput" autocomplete="off" placeholder="Search" id="searchinput" class="search-box-input"/>
+          <a id="close-suggestion"></a>
+
+          <div id="searchbox__suggestion">
+            <ul class="suggestion-list">
+            </ul>
+          </div>
+        </div>
 
         <p>
           <label>Type of Food</label>
@@ -57,3 +66,4 @@
         <input type="submit" id="searchsubmit" value="<?php echo esc_attr_x( 'Search Food', 'submit button' ); ?>" />
     </div>
 </form>
+</div>

@@ -14,7 +14,8 @@ get_header(); ?>
     $difficultyLevelUp = $_GET['difficulty-level-up'];
 
     global $wpdb;
-    $search_results = $wpdb->get_results("
+
+		$search_results = $wpdb->get_results("
         SELECT DISTINCT posts.*
         FROM $wpdb->posts posts
         INNER JOIN $wpdb->term_relationships term_relationship
@@ -30,16 +31,16 @@ get_header(); ?>
           AND ((term.name IN ('" . $typeOfFood . "', '" . $originOfFood . "')) OR posts.post_title = '" . $searchinput . "')"
         );
 
+
 		if ($searchinput != ""){
 			$search_results = $wpdb->get_results("
 	        SELECT DISTINCT posts.*
 	        FROM $wpdb->posts posts
 	        INNER JOIN $wpdb->postmeta post_meta
 	          ON post_meta.post_id = posts.ID
-	        WHERE posts.post_type = 'food' AND posts.post_status = 'publish'
-	          AND (posts.post_content LIKE '%" . $searchinput . "%'
-						OR posts.post_title LIKE '%" . $searchinput . "%'
-						OR post_meta.meta_value LIKE '%" . $searchinput . "%')"
+	        WHERE posts.post_status = 'publish'AND posts.post_type = 'food'
+
+						AND post_meta.meta_value LIKE '%" . $searchinput . "%'"
 	        );
 		}
 

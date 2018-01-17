@@ -1,0 +1,20 @@
+.food-suggestion{
+  border: 1px;
+  background: #f1f1f1;
+}
+
+.suggestion-list__items{
+  padding: 10px;
+  list-style: none;
+  border: 1px;
+}
+
+.suggestion-list__items a:hover{
+  color: black;
+}
+
+.suggestion-list li.active a:hover {
+    color: #FFF;
+    background-color: white;
+    border-radius: 3px;
+}
